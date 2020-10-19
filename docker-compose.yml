@@ -1,0 +1,52 @@
+version: "3.6"
+
+services:
+  frontend:
+    container_name: react-app
+    stdin_open: true
+    tty: true
+    environment:
+      - NODE_ENV=development
+      - CHODIKAR_USEPOLLING=true
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - "./frontend:/app-react/frontend"
+
+    ports:
+      - 3000:3000
+
+  backend:
+    container_name: Flask_Backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - "./backend:/flask/backend"
+    ports:
+      - 8084:5000
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=app.py
+      - PYTHONUNBUFFERED=1
+      - APP_CONFIG=Project.configs.DevelopmentConfig
+
+    networks:
+      - microservices
+      - dbs
+
+  dbpostgres:
+    build:
+      context: ./backend/db
+      dockerfile: Dockerfile
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - dbs
+
+networks:
+  microservices:
+    name: microservices
+  dbs:
+    name: dbs-network
