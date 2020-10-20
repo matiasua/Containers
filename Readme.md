@@ -1,6 +1,6 @@
-# ReactJS + Flask (REST API) + PostgreSQL con Docker
+# ReactJS + Flask + PostgreSQL con Docker
 
-Este proyecto permite ejecutar una aplicación rápida con ReactJS (front-end), Flask (backend Python) y PostgreSQL (base de datos relacional) ejecutándolo en contenedores Docker.
+Este proyecto permite ejecutar una aplicación rápida con ReactJS (frontend), Flask (backend Python) y PostgreSQL (base de datos relacional) ejecutándolo en contenedores Docker.
 
 ### Run the app
 
@@ -19,10 +19,12 @@ La aplicacion backend estara activa en el _puerto 8084_
 - En esta primera iteracion se creo el contenedor cliente con el proyecto inicial de react js.
 - Todavia no existe una comunicacion entre el frontend y el backend.
 - Las consultas a los endpoints se pueden realizar mediante POSTMAN 'http://localhost:8084'.
-- Antes de realizar consultas se debe hacer el upgrade de la base de datos con el siguiente comando:
+- Antes de realizar consultas se debe hacer el init, migrate y upgrade de la base de datos con los siguientes comandos:
 
 ```
+docker container exec [NAME CONTAINER] flask db init
+docker container exec [NAME CONTAINER] flask db migrate
 docker container exec [NAME CONTAINER] flask db upgrade
 ```
 
-- Quedo pendiente para la segunda iteracion los Testing y la integracion continua del proyecto.
+- Quedo pendiente para la segunda iteracion Testing e integracion continua del proyecto.
