@@ -17,6 +17,7 @@ La aplicacion backend estara activa en el _puerto 8084_
 
 - Este proyecto se implemento con Docker Desktop.
 - En esta primera iteracion se creo el contenedor cliente con el proyecto inicial de react js.
+- En el caso de error en el contenedor frontend debe hacer un "yarn upgrade" dentro del proyecto react. "/frontend"
 - Todavia no existe una comunicacion entre el frontend y el backend.
 - Las consultas a los endpoints se pueden realizar mediante POSTMAN 'http://localhost:8084'.
 - Antes de realizar consultas se debe hacer el init, migrate y upgrade de la base de datos con los siguientes comandos:
@@ -28,3 +29,4 @@ docker container exec [NAME CONTAINER] flask db upgrade
 ```
 
 - Quedo pendiente para la segunda iteracion Testing e integracion continua del proyecto.
+- Todavia no logro resolver el yarn upgrade del proyecto react.
