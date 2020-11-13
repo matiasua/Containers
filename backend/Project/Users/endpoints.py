@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from Project import db
 from Project.Users.models import Usuario
-from Project.Users.serializers import Usuario_Schema
+from Project.Users.serializers import Usuario_Schema, login_Schema
 from marshmallow.exceptions import ValidationError
 
 user_blueprint = Blueprint('users', __name__)
@@ -63,3 +63,17 @@ def update(id):
     save_user(user)
 
     return {'id': user.id, 'nombre': user.nombre, 'correo': user.correo, 'direccion': user.direccion}, 200
+
+
+@user_blueprint.route('/login', methods=['GET', 'POST'])
+def login():
+
+    loginObject = login_Schema.load(request.get_json())
+    user_query = Usuario.query.filter_by(correo=loginObject.correo).first()
+
+    if user_query != None:
+        if user_query.password == loginObject.password:
+            user = Usuario.query.filter_by(correo=loginObject.correo)
+            return jsonify(Usuario_Schema.dump(user, many=True)), 200
+        return "Contrasena incorrecta", 400
+    return "Usuario no registrado", 400
