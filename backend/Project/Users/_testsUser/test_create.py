@@ -4,16 +4,18 @@ from Project.Users.serializers import Usuario_Schema
 import Project.Users._testsUser.utils as utils
 
 class CreateTestCase(configTests):
+
     def test_create_user(self):
 
+
         data = utils.allDataUser()
+        self.assertEquals(0, Usuario.query.count())
         response = self.client.post(
             '/register',
             json=data
         )
         self.assertStatus(response, 201)
-        userCount = Usuario.query.count()
-        self.assertEquals(1, userCount)
+        self.assertEquals(1, Usuario.query.count())
 
 
     def test_create_user_no_data(self):
@@ -33,7 +35,7 @@ class CreateTestCase(configTests):
             json=data
         )
         self.assertStatus(response, 400)
-        self.assertEquals(response.get_json() , 'Contraseña no coincide')
+
 
 # 1 - Ingreso todos los datos del usuario
 # 2 - No ingreso ningun campo

@@ -9,11 +9,19 @@ def allDataUser():
         }
     return data
 
+def WithoutName():
+    data = {
+        "password": "password_test",
+        "confirmPassword": "password_test",
+        "correo": "correo@test",
+        "direccion": "direccion_test"
+    }
+
 def diff_pass():
     data = {
         "nombre": "name_test",
         "password": "password_test",
-        "confirmPassword": "password_test_diff",
+        "confirmPassword": "password_diff",
         "correo": "correo@test",
         "direccion": "direccion_test"
     }

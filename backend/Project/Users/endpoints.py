@@ -14,14 +14,17 @@ def save_user(user):
 
 
 @user_blueprint.route('/register', methods=['POST'])
-@user_blueprint.route('/users', methods=['POST'])
 def CreateUser():
-  user = Usuario_Schema.load(request.get_json())
+    datajson = request.get_json()
+    if datajson != {}:
+        if datajson['password'] == datajson['confirmPassword']:
+            user = Usuario_Schema.load(request.get_json())
 
-  save_user(user)
+            save_user(user)
 
-  return Usuario_Schema.dump(user), 201
-
+            return "Registro Exitoso", 201
+        return "Error de contraseña", 400
+    return "Campos Vacios", 400
 
 
 @user_blueprint.route('/users', methods=['GET'])

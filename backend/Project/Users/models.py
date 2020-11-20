@@ -4,6 +4,5 @@ class Usuario(db.Model):
   id = db.Column(db.Integer, primary_key=True, autoincrement=True)
   nombre = db.Column(db.String, nullable=False)
   password= db.Column(db.String, nullable=False)
-  confirmPassword = db.Column(db.String, nullable=False)
-  correo = db.Column(db.String, nullable=False, unique=True)
+  correo = db.Column(db.String, nullable=False)
   direccion = db.Column(db.String, nullable=True)

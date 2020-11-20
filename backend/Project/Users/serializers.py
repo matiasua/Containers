@@ -5,7 +5,8 @@ class UsuarioSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model= Usuario
         load_instance = True
-        load_only= ('password', 'confirmPassword' )
+        load_only= ('password',)
+        unknown = True
         
 
 Usuario_Schema = UsuarioSchema()

@@ -5,6 +5,7 @@ from Project import db
 
 class configTests(TestCase):
 
+
     def create_app(self):
         return current_app
 
